@@ -2,46 +2,42 @@
 Comparative analysis of YOLOv8 architectural enhancements (CBAM vs. CoordConv) using the COCO 2017 dataset for object detection.
 
 OVERVIEW
+
 This repository contains the research, implementation, and evaluation of various architectural modifications to the YOLOv8 (You Only Look Once) framework. The primary goal of this thesis was to investigate whether integrating specialized modules—specifically Attention Mechanisms (CBAM) and Coordinate Convolutions (CoordConv)—could significantly improve detection performance on the complex MS COCO 2017 dataset.
 
 The research focuses on the trade-off between architectural complexity, spatial awareness, and detection accuracy in real-time object detection systems.
 
 📋 Table of Contents
-Architectures
 
-Dataset & Preprocessing
+1.Architectures
 
-Experimental Setup
+2.Dataset & Preprocessing
 
-Current Results & Analysis
+3.Experimental Setup
 
-Future Work (Phase 2)
+4.Current Results & Analysis
 
-Installation & Usage
+5.Future Work (Phase 2)
 
-Project Structure
 
 🏗 Architectures <a name="architectures"></a>
+
 To isolate the impact of different structural changes, I developed and compared four distinct model variants based on the YOLOv8nano backbone:
 
 Model A: The Baseline
 Description: An unmodified YOLOv8n model.
-
 Purpose: Served as the control group to establish a performance benchmark for the COCO 2017 subset.
 
 Model B: YOLOv8 + CBAM (Attention)
 Feature: Integrated the Convolutional Block Attention Module (CBAM).
-
 Focus: This model applies both channel and spatial attention, allowing the network to focus on "what" is important and "where" the most informative features are located within the feature maps.
 
 Model C: YOLOv8 + CoordConv (Spatial Awareness)
 Feature: Replaced initial standard convolutions with Coordinate Convolutions.
-
 Focus: [TOP PERFORMER] Standard convolutions are translation-invariant, which can be a disadvantage for precise localization. CoordConv gives the model explicit access to the coordinates of pixels, significantly improving spatial reasoning.
 
 Model D: Combined Architecture
 Feature: A hybrid model featuring both CBAM and CoordConv.
-
 Focus: An attempt to achieve synergy between attention-based feature selection and coordinate-aware spatial localization.
 
 📊 Dataset & Preprocessing <a name="dataset--preprocessing"></a>Source: Microsoft COCO 2017Subset Size: 50,000 images (Curated to ensure class diversity while managing computational constraints).Preprocessing: Images were resized to $640 \times 640$ pixels. Standard augmentations (mosaic, mixup, and flips) were applied via the Ultralytics pipeline to ensure model robustness.
@@ -61,6 +57,7 @@ Batch Size: 16 (optimized for T4 VRAM)
 
 
 📈 Current Results & Analysis <a name="current-results--analysis"></a>
+
 The initial phase of the thesis concluded with the following findings:
 
 Model C (CoordConv) achieved the highest overall accuracy (mAP@50-95). This suggests that for general object detection on COCO, enhancing the model's spatial coordinate awareness is more effective than adding standard attention blocks.
@@ -70,6 +67,7 @@ Model B (CBAM) showed improvements in detecting smaller, textured objects but st
 Model D (Combined) showed promising results but indicated signs of diminishing returns, suggesting that the added parameters require a more extensive training schedule to converge.
 
 🚀 Future Work (Phase 2) <a name="future-work-phase-2"></a>
+
 I am currently preparing for a second phase of experimentation to further refine these results. The upcoming work includes:
 
 Data-to-Epoch Trade-off: I plan to reduce the dataset size to a highly concentrated sub-batch of 12,000–15,000 images.
@@ -86,13 +84,10 @@ To replicate this work, follow these steps:
 
 Clone the repo:
 
-Bash
-
 git clone https://github.com/[YOUR-USERNAME]/[YOUR-REPO-NAME].git
 cd [YOUR-REPO-NAME]
-Install dependencies:
 
-Bash
+Install dependencies:
 
 pip install -r requirements.txt
 Run a Notebook:
